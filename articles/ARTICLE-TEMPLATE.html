@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  THE FOLIO — ARTICLE TEMPLATE
+  ================================================================
+
+  HOW TO USE
+  ──────────
+  1. Copy this file into the right category subfolder and rename it:
+       articles/football/your-article-slug.html
+       articles/running/your-article-slug.html
+       articles/golf/your-article-slug.html
+       articles/tennis/your-article-slug.html
+
+  2. Update EVERY path that starts with "../../":
+       ../../css/style.css  → correct for articles/category/ (two levels deep)
+       ../../index.html     → correct for articles/category/
+     If you ever keep a file directly in articles/ (one level deep),
+     change these to ../ instead.
+
+  3. Find every ✏️ marker — those are the fields to personalise.
+     Everything else can stay as-is.
+
+  4. Register the article in index.html by appending one object to
+     the ARTICLES array at the bottom of that file. Push to GitHub
+     and Netlify deploys automatically.
+
+  COMPONENTS AVAILABLE INSIDE .article-body
+  ──────────────────────────────────────────
+    <p>                 — Body paragraph
+    <h2>                — Section heading
+    <h3>                — Sub-heading
+    .embed.embed-chart  — Chart or image visual (PNG/SVG from Python/R)
+    .embed.embed-table  — Inline data table
+    .embed.embed-interactive — iframe for Plotly HTML, Flourish, etc.
+    .finding            — Key finding / headline stat callout
+    .embed-placeholder  — Striped placeholder (swap out when chart is ready)
+
+  THUMBNAIL IMAGES (optional)
+  ──────────────────────────────────────────
+    If you want a real image on the homepage card instead of the
+    CSS-generated pattern, save a PNG to images/ and set the
+    "image" field in the ARTICLES array to "images/your-thumb.png".
+    Recommended size: 800 × 480 px.
+  ================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ✏️  Page title: "Article Headline — The Folio" -->
+<title>Expected Goals and the Art of Missing — The Folio</title>
+
+<!-- Open Graph — controls the preview card when sharing on social -->
+<!-- ✏️  Fill in title, description, canonical URL, and optionally an image -->
+<meta property="og:title"       content="Expected Goals and the Art of Missing">
+<meta property="og:description" content="Not all shots are equal. We dig into xG models, shot maps, and why your striker's finishing might not be as bad as you think.">
+<meta property="og:type"        content="article">
+<meta property="og:url"         content="https://YOUR-DOMAIN.com/articles/football/expected-goals-visual-guide.html">
+<!-- Uncomment and set a hero image once you have one:
+<meta property="og:image"       content="https://YOUR-DOMAIN.com/images/xg-hero.png"> -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- ✏️  Path to shared stylesheet — ../../ is correct for articles/category/ -->
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+<!-- ================================================================
+     NAV — identical on every page
+     ✏️  Keep these links in sync with index.html
+     ================================================================ -->
+<nav>
+  <!-- ✏️  ../../index.html is correct for articles/category/; use ../index.html for articles/ -->
+  <a class="nav-logo" href="../../index.html">The <span>Folio</span></a>
+  <ul class="nav-links">
+    <li><a href="mailto:YOUR_EMAIL_HERE">Contact</a></li>
+    <li><a href="https://github.com/YOUR_GITHUB"    target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noopener">LinkedIn</a></li>
+  </ul>
+</nav>
+
+
+<!-- ================================================================
+     ARTICLE HERO
+     ================================================================ -->
+<header class="article-hero">
+  <div class="article-hero-inner">
+
+    <!-- Back link — always at the top of the hero -->
+    <a class="article-back" href="../../index.html">Back to all articles</a>
+
+    <!--
+      ✏️  Category eyebrow
+      Change the class to match the category:
+        cat-football  →  amber
+        cat-running   →  red
+        cat-golf      →  forest green
+        cat-tennis    →  slate blue
+      The text should match the category name exactly as used in ARTICLES[].
+    -->
+    <div class="article-eyebrow cat-football">Football</div>
+
+    <!-- ✏️  Main headline — the article title -->
+    <h1 class="article-title">
+      Expected Goals and the Art of Missing: A Visual Guide to xG
+    </h1>
+
+    <!--
+      ✏️  Standfirst — one or two sentences expanding on the headline.
+      Should hook the reader and set up the argument. Displayed in italic.
+    -->
+    <p class="article-standfirst">
+      Not all shots are equal. Expected goals models assign each attempt a
+      probability based on location, angle, and context. Here's what the data
+      actually tells us — and where the model quietly breaks down.
+    </p>
+
+    <!-- ✏️  Byline: author name, ISO date, and read time in minutes -->
+    <div class="article-byline">
+      <span class="byline-author">Your Name Here</span>
+      <span class="byline-dot"></span>
+      <span class="byline-meta">15 Sep 2025</span>
+      <span class="byline-dot"></span>
+      <span class="byline-meta">6 min read</span>
+    </div>
+
+  </div>
+</header>
+
+
+<!-- ================================================================
+     ARTICLE BODY
+     Write the article here. Use the components documented below.
+     ================================================================ -->
+<main class="article-body">
+
+  <!-- ── BODY PARAGRAPHS ─────────────────────────────────────────── -->
+  <!--
+    Standard paragraph. No class needed.
+    Use <strong> for key terms, <em> for emphasis.
+    Use <a href="..."> for citations and links — they render in amber.
+  -->
+  <p>
+    The expected goals model was once the preserve of analytics consultants and
+    StatsBomb subscribers. Now it appears on Match of the Day. But most coverage
+    glosses over what xG actually measures — and, more importantly, what it doesn't.
+  </p>
+
+  <p>
+    At its core, xG is a probability. Every shot taken in a match is assigned a
+    value between 0 and 1: the expected probability of a goal from that position,
+    given historical data from thousands of similar attempts. A shot from six yards
+    out, central, with a clear line of sight might carry an xG of <strong>0.72</strong>.
+    A 30-yard thunderbolt might clock in at <strong>0.03</strong>.
+  </p>
+
+
+  <!-- ── SECTION HEADING ─────────────────────────────────────────── -->
+  <!--
+    <h2> creates a full-width section break with a bottom border.
+    Use one every 200–300 words to give the reader clear structure.
+    <h3> is available for sub-points within a section (no border).
+  -->
+  <h2>Why location alone isn't enough</h2>
+
+  <p>
+    Early xG models used just two variables: distance from goal and shot angle.
+    Modern versions layer in far more — whether the chance came from a cross, a
+    through ball, or a set piece; the pressure on the shooter; their dominant foot;
+    even the sequence of passes that created the opportunity.
+  </p>
+
+
+  <!-- ================================================================
+       EMBED: CHART / IMAGE
+       ─────────────────────────────────────────────────────────────────
+       For a chart or image saved as PNG/SVG from Python or R.
+
+       TO USE:
+         1. Export your figure (e.g. fig.savefig("xg-shot-map.png", dpi=150)).
+         2. Save to the images/ folder at the project root.
+         3. Replace the <div class="embed-placeholder"> block with:
+              <img src="../../images/xg-shot-map.png"
+                   alt="Shot map — Premier League 2024/25">
+         4. Update embed-title, embed-source, and embed-caption below.
+
+       The image renders edge-to-edge inside the embed frame.
+       ================================================================ -->
+  <div class="embed embed-chart">
+    <div class="embed-header">
+      <!-- ✏️ Short label for the chart — Space Mono uppercase, amber -->
+      <span class="embed-title">Shot map — Premier League 2024/25 (all teams)</span>
+      <!-- ✏️ Data source attribution -->
+      <span class="embed-source">Source: StatsBomb / FBref</span>
+    </div>
+    <div class="embed-content">
+      <!--
+        ✏️ Replace this placeholder with your real chart:
+           <img src="../../images/your-chart.png" alt="Description">
+      -->
+      <div class="embed-placeholder">
+        <span class="embed-placeholder-icon">📊</span>
+        <span>Shot map goes here — export from Python/R and save to images/</span>
+      </div>
+    </div>
+    <!-- ✏️ Caption: explain what the chart shows and what to notice -->
+    <div class="embed-caption">
+      Each point is a shot attempt. Colour encodes xG value — darker means higher
+      probability. The density around the six-yard box is expected; what's notable
+      is how steeply probability falls beyond 20 yards.
+    </div>
+  </div>
+
+  <p>
+    The shot map above makes the central insight visible in seconds: the vast
+    majority of high-xG chances come from a very small area of the pitch.
+    Outside that zone, almost everything is statistically noise — the model
+    knows it, even when our eyes disagree.
+  </p>
+
+
+  <!-- ================================================================
+       KEY FINDING CALLOUT
+       ─────────────────────────────────────────────────────────────────
+       Use this for a headline stat that deserves to stand alone —
+       the number or claim the whole article is building towards.
+
+       .finding-stat    — the big number, phrase, or short claim
+       .finding-context — one sentence placing it in context
+       ================================================================ -->
+  <div class="finding">
+    <div class="finding-label">Key Finding</div>
+    <!-- ✏️ The headline stat -->
+    <div class="finding-stat">73% of goals</div>
+    <!-- ✏️ The context sentence -->
+    <div class="finding-context">
+      came from shots with xG ≥ 0.10 — yet those shots made up only 31% of all
+      attempts in the 2024/25 Premier League season.
+    </div>
+  </div>
+
+
+  <!-- ── ANOTHER SECTION ─────────────────────────────────────────── -->
+  <h2>The finishing debate</h2>
+
+  <p>
+    When a striker consistently outperforms their xG — scoring more than the
+    model predicts — there are two explanations. Either they have genuinely elite
+    finishing ability, or they've been fortunate. Separating signal from luck
+    requires a large enough sample.
+  </p>
+
+  <p>
+    The uncomfortable truth is that for most players, a single season
+    (roughly 80–120 shots) isn't sufficient. You typically need two or three
+    seasons of data before over- or under-performance carries real statistical weight.
+  </p>
+
+
+  <!-- ================================================================
+       EMBED: DATA TABLE
+       ─────────────────────────────────────────────────────────────────
+       For small datasets — 10–20 rows works well on mobile.
+
+       Add class "num" to any <td> containing a key number:
+       it renders in amber Playfair Display for visual emphasis,
+       matching the style of the leaderboard on The Belt.
+       ================================================================ -->
+  <div class="embed embed-table">
+    <div class="embed-header">
+      <!-- ✏️ Table label and source -->
+      <span class="embed-title">xG vs Goals — Top strikers, PL 2024/25</span>
+      <span class="embed-source">Source: FBref</span>
+    </div>
+    <div class="embed-content">
+      <!-- ✏️ Replace placeholder rows with real data -->
+      <table>
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Goals</th>
+            <th>xG</th>
+            <th>Difference</th>
+            <th>Shots</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Placeholder A</td>
+            <td class="num">22</td>
+            <td>18.4</td>
+            <td class="num">+3.6</td>
+            <td>94</td>
+          </tr>
+          <tr>
+            <td>Placeholder B</td>
+            <td class="num">19</td>
+            <td>21.2</td>
+            <td class="num">−2.2</td>
+            <td>112</td>
+          </tr>
+          <tr>
+            <td>Placeholder C</td>
+            <td class="num">17</td>
+            <td>16.8</td>
+            <td class="num">+0.2</td>
+            <td>88</td>
+          </tr>
+          <tr>
+            <td>Placeholder D</td>
+            <td class="num">15</td>
+            <td>17.9</td>
+            <td class="num">−2.9</td>
+            <td>76</td>
+          </tr>
+          <tr>
+            <td>Placeholder E</td>
+            <td class="num">14</td>
+            <td>12.1</td>
+            <td class="num">+1.9</td>
+            <td>65</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- ✏️ Caption explaining the table -->
+    <div class="embed-caption">
+      Replace placeholders with real players. The "Difference" column
+      (goals minus xG) is where the interesting conversations start.
+    </div>
+  </div>
+
+
+  <!-- ── ANOTHER SECTION ─────────────────────────────────────────── -->
+  <h2>What xG can't tell you</h2>
+
+  <p>
+    Expected goals models are trained on historical shot data. They know how often
+    shots <em>like this one</em> have gone in. They don't know the goalkeeper's
+    exact positioning in this specific moment, whether a defender's outstretched
+    leg slightly deflected the ball, or that the striker was carrying a hamstring
+    knock since Thursday.
+  </p>
+
+
+  <!-- ================================================================
+       EMBED: INTERACTIVE VISUAL (iframe)
+       ─────────────────────────────────────────────────────────────────
+       For Plotly HTML exports, Observable notebooks, Flourish or
+       Datawrapper embeds, or any self-contained interactive.
+
+       OPTION A — Local Plotly export (recommended for full control):
+         fig.write_html("articles/football/xg-interactive.html")
+         Then set src="xg-interactive.html" (relative, same folder).
+
+       OPTION B — External embed (Flourish, Datawrapper, Observable):
+         Use the embed URL provided by the platform.
+         Adjust height to match the chart's natural proportions.
+
+       TIP: Set scrolling="no" on the iframe to prevent scroll-jacking
+       on mobile when the chart doesn't need internal scrolling.
+       ================================================================ -->
+  <div class="embed embed-interactive">
+    <div class="embed-header">
+      <!-- ✏️ Interactive chart label and tool attribution -->
+      <span class="embed-title">Interactive: shot explorer by xG bracket</span>
+      <span class="embed-source">Built with Plotly · hover for details</span>
+    </div>
+    <div class="embed-content">
+      <!--
+        ✏️ Replace the placeholder below with your iframe:
+
+        Local Plotly export (same folder as the article):
+          <iframe src="xg-interactive.html"
+                  height="480"
+                  scrolling="no"
+                  title="Interactive xG chart"></iframe>
+
+        External embed (Flourish example):
+          <iframe src="https://flo.uri.sh/visualisation/XXXXX/embed"
+                  height="500"
+                  scrolling="no"
+                  title="Shot map"></iframe>
+      -->
+      <div class="embed-placeholder">
+        <span class="embed-placeholder-icon">🖱️</span>
+        <span>
+          Interactive chart goes here.<br>
+          Local: <code>src="xg-interactive.html"</code> &nbsp;|&nbsp;
+          External: use the platform's embed URL.
+        </span>
+      </div>
+    </div>
+    <!-- ✏️ Caption for the interactive -->
+    <div class="embed-caption">
+      Use the filter controls to isolate shots by xG bracket and see how
+      finishing rate changes as chance quality increases.
+    </div>
+  </div>
+
+
+  <h2>Reading xG sceptically</h2>
+
+  <p>
+    The goal isn't to replace watching football with reading spreadsheets.
+    It's to sharpen your intuitions. When a pundit says a striker is "in great
+    form," xG lets you ask: are they genuinely finding better positions, or are
+    they in the same spots and finishing above expectation right now?
+  </p>
+
+  <p>
+    The model should make you ask better questions. It doesn't answer them.
+  </p>
+
+
+  <!-- ================================================================
+       SECOND FINDING CALLOUT (optional)
+       Delete this block if you only need one.
+       ================================================================ -->
+  <div class="finding">
+    <div class="finding-label">Worth Remembering</div>
+    <!-- ✏️ Second stat or takeaway -->
+    <div class="finding-stat">~100 shots</div>
+    <div class="finding-context">
+      is the minimum sample before a striker's xG outperformance carries
+      meaningful statistical weight. Most single-season debates are premature.
+    </div>
+  </div>
+
+  <p>
+    Used well, expected goals is one of the most honest lenses available to a
+    football analyst. It strips away narrative and forces you to confront
+    probability. What you do with that probability — whether you contextualise
+    it, interrogate it, or simply use it to ask harder questions — remains a
+    very human decision.
+  </p>
+
+  <!--
+    ================================================================
+    ADDING MORE SECTIONS
+    ================================================================
+    Copy any of the blocks above and place them here.
+
+    Typical article structure:
+      <p>          intro paragraph(s)
+      <h2>         first section
+      <p>          body
+      .embed       first visual
+      .finding     key stat
+      <h2>         second section
+      <p>          body
+      .embed       second visual
+      <h2>         final section / so-what
+      <p>          closing paragraph(s)
+    ================================================================
+  -->
+
+</main>
+
+
+<!-- ================================================================
+     ARTICLE END — back to index link
+     ================================================================ -->
+<div class="article-end">
+  <a class="article-end-back" href="../../index.html">Back to all articles</a>
+</div>
+
+
+<!-- ================================================================
+     FOOTER — identical across all pages
+     ✏️  Keep in sync with index.html
+     ================================================================ -->
+<footer>
+  <div class="footer-block">
+    <div class="footer-head">The Folio</div>
+    <div class="footer-body">
+      A sports analytics blog covering football, running, golf, and tennis
+      through data, visualisations, and long-form analysis.
+    </div>
+  </div>
+  <div class="footer-block">
+    <div class="footer-head">Written by</div>
+    <div class="footer-body">
+      <!-- ✏️ Replace with your name and links -->
+      Your Name Here<br>
+      <a href="https://github.com/YOUR_GITHUB"    target="_blank" rel="noopener">GitHub</a> ·
+      <a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href="mailto:YOUR_EMAIL_HERE">Email</a>
+    </div>
+  </div>
+  <div class="footer-block">
+    <div class="footer-head">Built with</div>
+    <div class="footer-body">
+      Pure HTML, CSS &amp; vanilla JS — no build step.<br>
+      Deployed via <a href="https://netlify.com" target="_blank" rel="noopener">Netlify</a>
+      from GitHub.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

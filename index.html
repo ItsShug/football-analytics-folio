@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Folio — Sports Analytics</title>
+<meta name="description" content="Football, running, golf, and tennis told through data and visuals.">
+
+<!-- Open Graph -->
+<meta property="og:title"       content="The Folio — Sports Analytics">
+<meta property="og:description" content="Football, running, golf, and tennis told through data and visuals.">
+<meta property="og:type"        content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- =====================================================================
+     NAV
+     ✏️  Replace the placeholder contact / social links below.
+     ===================================================================== -->
+<nav>
+  <a class="nav-logo" href="index.html">The <span>Folio</span></a>
+  <ul class="nav-links">
+    <li><a href="mailto:YOUR_EMAIL_HERE">Contact</a></li>
+    <li><a href="https://github.com/YOUR_GITHUB" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noopener">LinkedIn</a></li>
+  </ul>
+</nav>
+
+<!-- =====================================================================
+     MASTHEAD
+     ===================================================================== -->
+<header class="masthead">
+  <!-- Giant ambient letter — ghosted behind the title, same technique as The Belt -->
+  <div class="masthead-bg-letter" aria-hidden="true">F</div>
+  <div class="masthead-inner">
+    <div class="masthead-rule"></div>
+    <p class="masthead-eyebrow">Sports Analytics · Data-Driven Writing</p>
+    <h1 class="masthead-title">The <span>Folio</span></h1>
+    <p class="masthead-subtitle">Football, running, golf, and tennis — told through data and visuals</p>
+    <div class="masthead-rule-bottom"></div>
+  </div>
+</header>
+
+<div class="section-divider"></div>
+
+<!-- =====================================================================
+     ARTICLE INDEX
+     ===================================================================== -->
+<section>
+  <div class="section-wrap">
+
+    <!-- Category filter — JS wires up the click handlers below -->
+    <nav class="filter-bar" aria-label="Filter articles by category">
+      <span class="filter-label">Filter</span>
+      <button class="filter-btn active" data-cat="all">All</button>
+      <button class="filter-btn" data-cat="football">Football</button>
+      <button class="filter-btn" data-cat="running">Running</button>
+      <button class="filter-btn" data-cat="golf">Golf</button>
+      <button class="filter-btn" data-cat="tennis">Tennis</button>
+    </nav>
+
+    <!-- Card grid — populated by renderCards() -->
+    <div class="card-grid" id="cardGrid"></div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- =====================================================================
+     FOOTER
+     ✏️  Replace Your Name and placeholder links.
+     ===================================================================== -->
+<footer>
+  <div class="footer-block">
+    <div class="footer-head">The Folio</div>
+    <div class="footer-body">
+      A sports analytics blog covering football, running, golf, and tennis
+      through data, visualisations, and long-form analysis. No noise — just
+      numbers that matter.
+    </div>
+  </div>
+  <div class="footer-block">
+    <div class="footer-head">Written by</div>
+    <div class="footer-body">
+      Your Name Here<br>
+      <a href="https://github.com/YOUR_GITHUB" target="_blank" rel="noopener">GitHub</a> ·
+      <a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href="mailto:YOUR_EMAIL_HERE">Email</a>
+    </div>
+  </div>
+  <div class="footer-block">
+    <div class="footer-head">Built with</div>
+    <div class="footer-body">
+      Pure HTML, CSS &amp; vanilla JS — no build step.<br>
+      Deployed via <a href="https://netlify.com" target="_blank" rel="noopener">Netlify</a>
+      from GitHub.
+    </div>
+  </div>
+</footer>
+
+
+<!-- =====================================================================
+     ARTICLES DATA ARRAY
+     ─────────────────────────────────────────────────────────────────────
+     To publish a new article:
+
+       1. Copy articles/ARTICLE-TEMPLATE.html into the right category folder:
+            articles/football/your-slug.html
+            articles/running/your-slug.html   etc.
+
+       2. Fill in the template (every ✏️ marker is a field to edit).
+
+       3. Add one object to the ARTICLES array below:
+
+            {
+              title:    "Your Article Title",
+              slug:     "articles/football/your-slug.html",
+              category: "football",            // football | running | golf | tennis
+              desc:     "Short teaser — one or two sentences, ~20 words.",
+              date:     "YYYY-MM-DD",
+              mins:     6,                     // estimated read time in minutes
+              image:    ""                     // optional: "images/your-thumb.png"
+                                               // leave "" to use the CSS pattern
+            },
+
+       4. Commit and push — Netlify deploys automatically.
+
+     Articles are sorted newest-first automatically.
+     ===================================================================== -->
+<script>
+const ARTICLES = [
+  /* ── FOOTBALL ─────────────────────────────────────────────── */
+  {
+    title:    "Did the 48-Team World Cup Actually Change Anything?",
+    slug:     "articles/football/world-cup-2026-48-team-analysis.html",
+    category: "football",
+    desc:     "Goals, margins, and results have barely shifted. The real change is somewhere else — and the data tells a more interesting story than either camp expected.",
+    date:     "2026-07-21",
+    mins:     5,
+    image:    "output/05_avg_goals_per_game.png"
+  },
+  {
+    title:    "What Kind of Champions Are Arsenal? A Data-Driven Look at Their Title-Winning Season",
+    slug:     "articles/football/arsenal-what-kind-of-champions-2025-26.html",
+    category: "football",
+    desc:     "Arsenal end a 21-year wait. We benchmark their 2025/26 campaign against every Premier League champion since 2014/15 to find out where Arteta's side stand historically.",
+    date:     "2026-06-23",
+    mins:     6,
+    image:    "images/arsenal_vs_closest_champion.png"
+  }
+
+  /* ── Add new articles above this line ───────────────────── */
+];
+
+/* ── Helpers ─────────────────────────────────────────────────────────── */
+
+const CAT_ICONS = {
+  football: "⚽",
+  running:  "🏃",
+  golf:     "⛳",
+  tennis:   "🎾"
+};
+
+function fmtDate(iso) {
+  return new Date(iso + 'T00:00:00').toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'short', year: 'numeric'
+  });
+}
+
+/* ── Card renderer ───────────────────────────────────────────────────── */
+
+function renderCards(filter) {
+  const grid = document.getElementById('cardGrid');
+  const items = (filter === 'all')
+    ? ARTICLES
+    : ARTICLES.filter(a => a.category === filter);
+
+  if (items.length === 0) {
+    grid.innerHTML = '<p class="no-articles">No articles in this category yet — check back soon.</p>';
+    return;
+  }
+
+  // Newest first
+  const sorted = [...items].sort((a, b) => b.date.localeCompare(a.date));
+
+  grid.innerHTML = sorted.map((a, i) => {
+    const thumbStyle = a.image ? ` style="background-image:url('${a.image}')"` : '';
+    return `
+    <article class="card" style="animation:fadeIn 0.4s ${i * 0.07}s both">
+      <a href="${a.slug}" class="card-link">
+        <div class="card-thumb"
+             data-cat="${a.category}"
+             data-icon="${CAT_ICONS[a.category] || ''}"${thumbStyle}></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="cat-tag cat-${a.category}">${a.category}</span>
+            <span class="card-date">${fmtDate(a.date)} · ${a.mins}&thinsp;min</span>
+          </div>
+          <h2 class="card-title">${a.title}</h2>
+          <p class="card-desc">${a.desc}</p>
+        </div>
+      </a>
+    </article>`;
+  }).join('');
+}
+
+/* ── Filter button wiring ────────────────────────────────────────────── */
+
+let activeFilter = 'all';
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeFilter = btn.dataset.cat;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderCards(activeFilter);
+  });
+});
+
+/* Initial render */
+renderCards('all');
+</script>
+
+</body>
+</html>
